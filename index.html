@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic Tac Toe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+ <!-- 👤 Login Info Popup (Shows First) -->
+
+
+  <!-- 🔄 Loading Screen (Comes after login) -->
+  <div id="loadingScreen" class="loading-screen hidden">
+    <div class="loader"></div>
+    <p>Loading Game...</p>
+  </div>
+
+  <!-- 🔲 Dark overlay -->
+  <div id="overlay" class="overlay hidden"></div>
+
+  <!-- 🎮 Game Mode Selection Popup -->
+ <!-- 🎮 Enhanced Game Mode Selection Popup -->
+<div id="modePopup" class="popup mode-popup glass animated-popup">
+  <h2>Select Game Mode</h2>
+  <div class="mode-buttons">
+    <button onclick="startGame('friend')" class="fancy-btn">
+      🧍 Play with Friend
+    </button>
+    <button onclick="startGame('computer')" class="fancy-btn">
+      🤖 Play with Computer
+    </button>
+  </div>
+</div>
+
+
+  <!-- 👥 Player Name Popup -->
+<!-- 👥 Animated Player Name Popup -->
+<div id="namePopup" class="popup name-popup glass hidden">
+  <h2>Enter Player Name(s)</h2>
+  <div class="input-group">
+    <label for="playerXName">🧍 Player X:</label>
+    <input type="text" id="playerXName" placeholder="Enter Player X Name" required />
+  </div>
+  <div class="input-group" id="playerOContainer">
+    <label for="playerOName">🧍 Player O:</label>
+    <input type="text" id="playerOName" placeholder="Enter Player O Name" required />
+  </div>
+  <button onclick="startGameWithNames()" class="fancy-btn glow">🎮 Start Game</button>
+</div>
+  <!-- 🕹️ Main Game UI -->
+  <div class="game-container hidden" id="gameBoard">
+    <h1 class="game-title">Tic Tac Toe</h1>
+
+    <p id="roundIndicator" class="round-counter">Round 1 / 10</p>
+
+    <!-- 🧮 Score Board -->
+    <div class="score-board">
+      <div class="player-score" id="playerXBox">
+        <span class="player-name">X</span>
+        <span id="scoreX" class="score-number">0</span>
+      </div>
+      <div class="player-score" id="playerOBox">
+        <span class="player-name">O</span>
+        <span id="scoreO" class="score-number">0</span>
+      </div>
+    </div>
+
+    <!-- 🎯 Game Board -->
+    <div class="board" id="board">
+      <!-- 9 cells generated dynamically -->
+    </div>
+
+    <!-- 🔄 Game Status -->
+    <p class="status" id="status"></p>
+
+    <!-- ✅ Round Result Popup -->
+    <div id="nextMatchPopup" class="popup hidden">
+      <h2 id="roundResultText"></h2>
+      <button onclick="nextMatch()">Next Match</button>
+    </div>
+
+    <!-- 🎉 Final Celebration Popup -->
+    <div id="celebrationPopup" class="popup hidden">
+      <h2 id="winnerNameDisplay"></h2>
+      <button id="playAgainBtn">Play Again</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
