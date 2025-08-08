@@ -22,34 +22,42 @@
   <div id="overlay" class="overlay hidden"></div>
 
   <!-- 🎮 Game Mode Selection Popup -->
- <!-- 🎮 Enhanced Game Mode Selection Popup -->
-<div id="modePopup" class="popup mode-popup glass animated-popup">
-  <h2>Select Game Mode</h2>
-  <div class="mode-buttons">
-    <button onclick="startGame('friend')" class="fancy-btn">
-      🧍 Play with Friend
-    </button>
-    <button onclick="startGame('computer')" class="fancy-btn">
-      🤖 Play with Computer
-    </button>
+  <div id="modePopup" class="popup mode-popup glass animated-popup">
+    <h2>Select Game Mode</h2>
+    <div class="mode-buttons">
+      <button onclick="startGame('friend')" class="fancy-btn">
+        🧍 Play with Friend
+      </button>
+      <button onclick="startGame('computer')" class="fancy-btn">
+        🤖 Play with Computer
+      </button>
+    </div>
   </div>
-</div>
 
+  <!-- 🎮 Difficulty Selection Popup (For Computer Mode) -->
+  <div id="difficultyPopup" class="popup difficulty-popup glass hidden">
+    <h2>Select Difficulty Level</h2>
+    <div class="mode-buttons">
+      <button onclick="selectDifficulty('easy')" class="fancy-btn">🟢 Easy</button>
+      <button onclick="selectDifficulty('medium')" class="fancy-btn">🟠 Medium</button>
+      <button onclick="selectDifficulty('hard')" class="fancy-btn">🔴 Hard</button>
+    </div>
+  </div>
 
   <!-- 👥 Player Name Popup -->
-<!-- 👥 Animated Player Name Popup -->
-<div id="namePopup" class="popup name-popup glass hidden">
-  <h2>Enter Player Name(s)</h2>
-  <div class="input-group">
-    <label for="playerXName">🧍 Player X:</label>
-    <input type="text" id="playerXName" placeholder="Enter Player X Name" required />
+  <div id="namePopup" class="popup name-popup glass hidden">
+    <h2>Enter Player Name(s)</h2>
+    <div class="input-group">
+      <label for="playerXName">🧍 Player X:</label>
+      <input type="text" id="playerXName" placeholder="Enter Player X Name" required />
+    </div>
+    <div class="input-group" id="playerOContainer">
+      <label for="playerOName">🧍 Player O:</label>
+      <input type="text" id="playerOName" placeholder="Enter Player O Name" required />
+    </div>
+    <button onclick="startGameWithNames()" class="fancy-btn glow">🎮 Start Game</button>
   </div>
-  <div class="input-group" id="playerOContainer">
-    <label for="playerOName">🧍 Player O:</label>
-    <input type="text" id="playerOName" placeholder="Enter Player O Name" required />
-  </div>
-  <button onclick="startGameWithNames()" class="fancy-btn glow">🎮 Start Game</button>
-</div>
+
   <!-- 🕹️ Main Game UI -->
   <div class="game-container hidden" id="gameBoard">
     <h1 class="game-title">Tic Tac Toe</h1>
