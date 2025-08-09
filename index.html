@@ -20,7 +20,7 @@
 
 
 <!-- Background Music -->
-<audio id="bgMusic" src="sounds/background.mp3" loop></audio>
+<audio id="bgMusic" src="background.mp3" loop></audio>
 
 <!-- Sound Effects -->
 <audio id="clickSound" src="sounds/click.mp3"></audio>
@@ -30,35 +30,12 @@
 
   <!-- 🔲 Dark overlay -->
   <div id="overlay" class="overlay hidden"></div>
-  <button id="profileBtn" class="profile-btn" title="Profile">👤</button>
 
   <!-- Settings Button -->
-<button id="settingsBtn" class="settings-btn" aria-label="Settings">⚙️</button>
+
 <!-- ⚙️ Settings Popup -->
-<div id="settingsPopup" class="popup settings-popup glass hidden">
-  <h2>Settings</h2>
-  
-  <div class="settings-option">
-    <label for="soundToggle">🔊 Sound Effects</label>
-    <input type="checkbox" id="soundToggle" checked />
-  </div>
-  
-  <div class="settings-option">
-    <label for="animationsToggle">✨ Animations</label>
-    <input type="checkbox" id="animationsToggle" checked />
-  </div>
-  
-  <div class="settings-option">
-    <label for="themeSelect">🎨 Theme</label>
-    <select id="themeSelect">
-      <option value="default">Default</option>
-      <option value="dark">Dark</option>
-      <option value="light">Light</option>
-    </select>
-  </div>
-  
-  <button id="closeSettingsBtn" class="fancy-btn">Close</button>
-</div>
+
+ 
 
 
   <!-- 🎮 Game Mode Selection Popup -->
@@ -137,11 +114,13 @@
     </div>
 
     <!-- 🎉 Final Celebration Popup -->
-    <div id="celebrationPopup" class="popup hidden">
-      <h2 id="winnerNameDisplay"></h2>
-      <button id="playAgainBtn">Play Again</button>
-    </div>
-  </div>
+  <!-- 🎉 Final Celebration Popup -->
+<div id="celebrationPopup" class="popup hidden">
+  <h2 id="winnerNameDisplay"></h2>
+  <p id="congratsMessage" class="congrats-text"></p>
+  <button id="playAgainBtn">Play Again</button>
+</div>
+
 
   <script src="script.js"></script>
 </body>
