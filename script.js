@@ -9,6 +9,7 @@ window.addEventListener("load", () => {
   }, 1500);
 });
 
+
 /* ---------- DOM refs ---------- */
 const board = document.getElementById("board");
 const statusText = document.getElementById("status");
@@ -16,14 +17,26 @@ const scoreXElement = document.getElementById("scoreX");
 const scoreOElement = document.getElementById("scoreO");
 const roundIndicator = document.getElementById("roundIndicator");
 
-const modePopup = document.getElementById("modePopup");
+
 const difficultyPopup = document.getElementById("difficultyPopup");
 const namePopup = document.getElementById("namePopup");
 const nextMatchPopup = document.getElementById("nextMatchPopup");
 const roundResultText = document.getElementById("roundResultText");
-const celebrationPopup = document.getElementById("celebrationPopup");
 const winnerNameDisplay = document.getElementById("winnerNameDisplay");
 const playAgainBtn = document.getElementById("playAgainBtn");
+const homeBtn = document.getElementById("homeBtn");
+const gameBoard = document.getElementById("gameBoard");
+const modePopup = document.getElementById("modePopup");
+const celebrationPopup = document.getElementById("celebrationPopup");
+const settingsBtn = document.getElementById("settingsBtn");
+const settingsPopup = document.getElementById("settingsPopup");
+const closeSettingsBtn = document.getElementById("closeSettingsBtn");
+const settingsCloseBtn = document.getElementById("settingsCloseBtn");
+const themeSelect = document.getElementById("themeSelect");
+const bgMusic = document.getElementById("bgMusic");
+const clickSound = document.getElementById("clickSound");
+const winSound = document.getElementById("winSound");
+const drawSound = document.getElementById("drawSound");
 
 /* ---------- Game state ---------- */
 let cells = [];
@@ -37,8 +50,12 @@ let scoreO = 0;
 let round = 1;
 let maxRounds = 10;
 let isGameActive = true;
+let hideTimeout;
 
 const playerColors = { X: "#e74c3c", O: "#3498db" };
+
+
+
 
 /* ---------- Utility: hide all popups ---------- */
 function hideAllPopups() {
@@ -81,6 +98,14 @@ function selectDifficulty(level) {
     namePopup.classList.remove("hidden");
   }
 }
+function goHome() {
+  celebrationPopup.classList.add("hidden");
+  gameBoard.classList.add("hidden");
+  modePopup.classList.remove("hidden");
+  resetFullGame(true); // optional: reset game state
+}
+
+homeBtn.addEventListener("click", goHome);
 
 /* ---------- Start after entering names ---------- */
 function startGameWithNames() {
@@ -380,6 +405,83 @@ function resetFullGame() {
   updateStatus();
 }
 
+// Load saved theme on page load
+window.addEventListener("load", () => {
+  const savedTheme = localStorage.getItem("selectedTheme") || "default";
+  themeSelect.value = savedTheme;
+  applyTheme(savedTheme);
+});
+
+// When user changes theme
+themeSelect.addEventListener("change", function () {
+  const selected = this.value;
+  applyTheme(selected);
+  localStorage.setItem("selectedTheme", selected);
+});
+
+function applyTheme(theme) {
+  document.body.classList.remove("dark-theme", "light-theme", "default-theme");
+
+  if (theme === "dark") {
+    document.body.classList.add("dark-theme");
+  } else if (theme === "light") {
+    document.body.classList.add("light-theme");
+  } else {
+    document.body.classList.add("default-theme");
+  }
+}
+function openSettings() {
+  settingsPopup.classList.remove("hidden");
+  resetAutoClose();
+}
+
+function closeSettings() {
+  settingsPopup.classList.add("hidden");
+  clearTimeout(hideTimeout);
+}
+
+function resetAutoClose() {
+  clearTimeout(hideTimeout);
+  hideTimeout = setTimeout(() => {
+    closeSettings();
+  }, 5000); // auto-close after 5s
+}
+
+settingsBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  openSettings();
+});
+
+settingsCloseBtn.addEventListener("click", closeSettings);
+
+document.addEventListener("click", (e) => {
+  if (!settingsPopup.contains(e.target) && !settingsBtn.contains(e.target)) {
+    closeSettings();
+  }
+});
+
+// Start music when page loads
+window.addEventListener("load", () => {
+  // Some browsers require user interaction before playing audio
+  document.body.addEventListener("click", startMusicOnce, { once: true });
+});
+
+function startMusicOnce() {
+  bgMusic.volume = 0.5; // 50% volume
+  bgMusic.play().catch(err => console.log("Music blocked until user interacts."));
+}
+
+// Optional: Toggle mute button
+function toggleMusic() {
+  if (bgMusic.paused) {
+    bgMusic.play();
+  } else {
+    bgMusic.pause();
+  }
+}
+
+// Keep popup open while interacting
+settingsPopup.addEventListener("click", resetAutoClose);
 /* ---------- Export functions to global so onclick="" in HTML keeps working ---------- */
 window.startGame = startGame;
 window.selectDifficulty = selectDifficulty;
